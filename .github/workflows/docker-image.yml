@@ -14,6 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag face-detection-for-python-demo:$GITHUB_SHA
+      run: docker build . --file Dockerfile --tag face-detection-for-python-demo:latest
     - name: Push the Docker image
-      run: docker push ghcr.io/merax/face-detection-for-python-demo:$GITHUB_SHA
+      run: docker push ghcr.io/merax/face-detection-for-python-demo:latest
+
