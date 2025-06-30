@@ -1,0 +1,32 @@
+
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  # Do the builds on all pull requests (to test them)
+  pull_request: []
+
+jobs:
+  to-sif:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/singularity/singularity:v3.8.3
+    strategy:
+      fail-fast: false
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: |
+        echo "Using $(singularity -v)"
+
+        echo "${GITHUB_TOKEN}" | singularity remote login -u ${{ github.actor }} --password-stdin oras://ghcr.io
+
+        export tag=a42359f7cd4871abd6f05e294b7433c5c50618d7
+        export IMAGE_NAME=$(echo ${GITHUB_REPOSITORY} | tr '[:upper:]' '[:lower:]')
+
+        singularity pull docker://${IMAGE_NAME}:${tag}
+        ls -l
+        singularity push *.sif oras://ghcr.io/${IMAGE_NAME}:${tag}

@@ -7,9 +7,6 @@ on:
   # Do the builds on all pull requests (to test them)
   pull_request: []
 
-permissions:
-  packages: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
