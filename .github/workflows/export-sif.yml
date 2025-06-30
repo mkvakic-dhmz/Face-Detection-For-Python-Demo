@@ -1,11 +1,14 @@
 
-name: Docker Image CI
+name: Export sif
 
 on:
   push:
     branches: [ "main" ]
   # Do the builds on all pull requests (to test them)
   pull_request: []
+
+permissions:
+  packages: write
 
 jobs:
   to-sif:
