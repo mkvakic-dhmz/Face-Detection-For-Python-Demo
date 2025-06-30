@@ -4,16 +4,16 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  # Do the builds on all pull requests (to test them)
+  pull_request: []
 
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag Face-Detection-For-Python-Demo:$GITHUB_SHA
+    - name: Push the Docker image
+      run: docker push ghcr.io/MeraX/Face-Detection-For-Python-Demo:$GITHUB_SHA
