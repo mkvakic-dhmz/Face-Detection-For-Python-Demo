@@ -30,6 +30,6 @@ jobs:
         export tag=a42359f7cd4871abd6f05e294b7433c5c50618d7
         export IMAGE_NAME=$(echo ${GITHUB_REPOSITORY} | tr '[:upper:]' '[:lower:]')
 
-        singularity pull docker://${IMAGE_NAME}:${tag}
+        singularity pull docker://ghcr.io/${IMAGE_NAME}:${tag}
         ls -l
         singularity push *.sif oras://ghcr.io/${IMAGE_NAME}:${tag}
