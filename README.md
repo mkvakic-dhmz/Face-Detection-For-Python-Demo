@@ -13,7 +13,7 @@ This project demonstrates the use of the [Face Detection For Python using ONNX](
 5. [Linting](#linting)
 6. [CI/CD Pipeline](#cicd-pipeline)
 7. [Docker Container](#docker-container)
-8. [Singularity Container](#singularity-container)
+8. [Apptainer Container](#apptainer-container)
 
 ## Project Overview
 -----------------
@@ -86,14 +86,14 @@ To build the Docker container manually, navigate to the project directory and ru
 kaniko build --context . --destination facenet_docker.img
 ```
 
-## Singularity Container
+## Apptainer Container
 ----------------------
 
-The Singularity container is built using Singularity. The Singularity definition file is located in the project root directory.
+The container image file (`face.sif`) is built using [Apptainer](https://apptainer.org/docs/user/latest/) and a definition file (`face.def`) located in the project root directory.
 
-To build the Singularity container manually, navigate to the project directory and run the following command:
+To build the container image file manually, navigate to the project directory and run the following command:
 
 ```bash
-singularity build facenet_docker.img Singularity.def
+apptainer build face.sif face.def
 ```
 
