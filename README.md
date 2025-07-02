@@ -14,6 +14,7 @@ This project demonstrates the use of the [Face Detection For Python using ONNX](
 6. [CI/CD Pipeline](#cicd-pipeline)
 7. [Docker Container](#docker-container)
 8. [Apptainer Container](#apptainer-container)
+9. [Image Dataset](#image-dataset)
 
 ## Project Overview
 -----------------
@@ -97,3 +98,7 @@ To build the container image file manually, navigate to the project directory an
 apptainer build face.sif face.def
 ```
 
+## Image Dataset
+----------------
+
+The images come from the [Unconstrained Face Detection Dataset (UFDD)](https://ufdd.info/), which need to be downloaded in form of a zip file (`UFDD_val.zip`) and extracted in the root directory.
