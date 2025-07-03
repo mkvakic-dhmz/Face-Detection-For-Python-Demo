@@ -41,7 +41,7 @@ This project uses the [Face Detection For Python using ONNX](https://github.com/
 * Black 25,1
 * Kaniko
 * Apptainer
-* [Unconstrained Face Detection Dataset (UFDD)](https://ufdd.info/) (more details in the [image dataset chapter below](#image-dataset))
+* [Unconstrained Face Detection Dataset (UFDD)](https://ufdd.info/) (more details [below](#image-dataset))
 
 ## Installation
 ------------
