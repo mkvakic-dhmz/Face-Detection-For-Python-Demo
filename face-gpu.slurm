@@ -2,7 +2,8 @@
 
 #SBATCH --qos=ng
 #SBATCH --gpus=1
-#SBATCH --time=10:00
+#SBATCH --time=05:00
+#SBATCH --output=%x.out
 
 # Set the environment
 module load apptainer
@@ -14,5 +15,5 @@ image_paths=($(find UFDD_val/images -type f -and -not -wholename '*labelled*'))
 # Run the detection algorithm on each of them
 for image_path in ${image_paths[@]};
 do
-    apptainer exec --nv face-gpu.sif python3 face-gpu.py ${image_path}
+    apptainer run --nv face-gpu.sif ${image_path}
 done

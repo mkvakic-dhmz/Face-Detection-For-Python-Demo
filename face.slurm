@@ -3,7 +3,8 @@
 #SBATCH --qos=nf
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=15:00
+#SBATCH --time=05:00
+#SBATCH --output=%x.out
 
 # Set the environment
 module load apptainer
