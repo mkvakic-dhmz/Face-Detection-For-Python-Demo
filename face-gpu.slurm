@@ -2,7 +2,7 @@
 
 #SBATCH --qos=ng
 #SBATCH --gpus=1
-#SBATCH --time=10:00
+#SBATCH --time=05:00
 #SBATCH --output=%x.out
 
 # Set the environment
