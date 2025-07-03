@@ -3,7 +3,7 @@ From: nvcr.io/nvidia/cuda:12.9.1-cudnn-runtime-ubuntu22.04
 
 %files
     requirements.txt /opt/dwd/requirements.txt
-    face.py /opt/dwd/face.py
+    face-gpu.py /opt/dwd/face-gpu.py
 
 %post
     # Install base packages
@@ -31,14 +31,14 @@ From: nvcr.io/nvidia/cuda:12.9.1-cudnn-runtime-ubuntu22.04
         wget https://raw.githubusercontent.com/wangsl/pthread-setaffinity/main/pthread-setaffinity.c && \
         gcc -fPIC -shared -Wl,-soname,libpthread-setaffinity.so -ldl -o libpthread-setaffinity.so pthread-setaffinity.c
 
-    # Change face.py's permissions
-    chmod 755 /opt/dwd/face.py
+    # Change face-gpu.py's permissions
+    chmod 755 /opt/dwd/face-gpu.py
 
 %environment
     . /opt/dwd/venv/bin/activate
-    export CUDA_HOME=/usr/local/cuda
     export LD_PRELOAD=/opt/pthread-affinity/libpthread-setaffinity.so
     export LD_LIBRARY_PATH='/usr/lib/x86_64-linux-gnu':$LD_LIBRARY_PATH
+    export CUDA_HOME=/usr/local/cuda
 
 %runscript
-    exec /opt/nvidia/nvidia_entrypoint.sh /opt/dwd/face.py "$@"
+    exec /opt/dwd/face-gpu.py "$@"
