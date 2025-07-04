@@ -19,14 +19,7 @@ def label_faces(image_filename: pathlib.Path, face_detector: FaceDetection):
     faces = face_detector(image_filename)
     print(f"Found {len(faces)} faces in {image_filename}")
 
-    # Draw faces in a new image
-    render_data = detections_to_render_data(faces, bounds_color=Colors.GREEN, line_width=3)
-    image = render_to_image(render_data, image)
-
-    # Save the new image to a new file
-    image.save(image_filename.with_suffix(".labelled.jpg"))
-
-def mark_faces_parallel(image_filenames: List[pathlib.Path]):
+def mark_faces_parallel(images_directory: pathlib.Path):
     """Mark all faces recognized in the image"""
 
     # Create a single thread session
@@ -39,8 +32,11 @@ def mark_faces_parallel(image_filenames: List[pathlib.Path]):
     face_detector = FaceDetection(model_type=FaceDetectionModel.BACK_CAMERA)
     face_detector.session = ort.InferenceSession(face_detector.model_path, sess_options=sess_options)
 
+    # Get images from the directory
+    image_filenames = images_directory.rglob('*.jpg')
+
     # Create an executor context
-    with ThreadPoolExecutor(max_workers=1) as executor:
+    with ThreadPoolExecutor(max_workers=8) as executor:
 
         # Label faces concurrently
         label_faces_partial = partial(label_faces, face_detector=face_detector)
